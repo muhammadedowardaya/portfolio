@@ -44,7 +44,9 @@ type CharacterProps = JSX.IntrinsicElements['group'] & {
 
 export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 	const group = useRef<Group>(null);
-	const { nodes, materials, animations } = useGLTF('/models/YBOT.glb');
+	const { nodes, materials, animations } = useGLTF(
+		`${import.meta.env.BASE_URL}/models/YBOT.glb`
+	);
 	const { actions, mixer } = useAnimations(animations, group);
 
 	const { camera } = useThree();

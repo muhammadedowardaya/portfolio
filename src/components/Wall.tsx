@@ -6,7 +6,9 @@ import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
 export function Wall(props) {
-	const { nodes, materials } = useGLTF('/models/wall.glb');
+	const { nodes, materials } = useGLTF(
+		`${import.meta.env.BASE_URL}/models/wall.glb`
+	);
 
 	return (
 		<group {...props} dispose={null}>

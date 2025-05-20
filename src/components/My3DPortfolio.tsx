@@ -66,7 +66,7 @@ export default function My3DPortfolio() {
 					</Physics>
 				</Suspense>
 				<Environment
-					files="/textures/nightsky.exr"
+					files={`${import.meta.env.BASE_URL}/textures/nightsky.exr`}
 					// background
 					ground={{
 						height: 100, // Atur tinggi sphere HDRI dari ground ke atas
@@ -123,7 +123,7 @@ export default function My3DPortfolio() {
 												} menu-item rounded-sm flex items-center gap-4 w-full p-2`}
 											>
 												<img
-													src="/icons/info.svg"
+													src={`${import.meta.env.BASE_URL}/icons/info.svg`}
 													width={20}
 													className="pointer-events-none"
 													alt="info icon"
@@ -145,7 +145,7 @@ export default function My3DPortfolio() {
 												} menu-item rounded-sm flex items-center gap-4 w-full p-2`}
 											>
 												<img
-													src="/icons/road.svg"
+													src={`${import.meta.env.BASE_URL}/icons/road.svg`}
 													width={20}
 													height={20}
 													alt="road icon"
@@ -168,7 +168,9 @@ export default function My3DPortfolio() {
 												} menu-item rounded-sm flex items-center gap-4 w-full p-2`}
 											>
 												<img
-													src="/icons/contact-calendar.svg"
+													src={`${
+														import.meta.env.BASE_URL
+													}/icons/contact-calendar.svg`}
 													width={20}
 													height={20}
 													alt="contact icon"
@@ -187,7 +189,7 @@ export default function My3DPortfolio() {
 									onClick={() => setShowMenu(false)}
 								>
 									<img
-										src="/icons/baseline-close.svg"
+										src={`${import.meta.env.BASE_URL}/icons/baseline-close.svg`}
 										width={24}
 										className="pointer-events-none"
 										alt="close icon"
@@ -209,7 +211,7 @@ export default function My3DPortfolio() {
 								exit={{ opacity: 0, y: '-50%' }}
 							>
 								<img
-									src="/icons/baseline-menu.svg"
+									src={`${import.meta.env.BASE_URL}/icons/baseline-menu.svg`}
 									width={24}
 									className="pointer-events-none"
 									alt="menu icon"
@@ -311,7 +313,7 @@ export function SceneWrapper({ onLoaded }: { onLoaded: () => void }) {
 function ArrowRight({ className }: { className?: string }) {
 	return (
 		<img
-			src="/icons/arrow-right.svg"
+			src={`${import.meta.env.BASE_URL}/icons/arrow-right.svg`}
 			width={20}
 			alt="penunjuk menu"
 			className={`${className} absolute -left-6 top-1/2 -translate-y-1/2 pointer-events-none`}

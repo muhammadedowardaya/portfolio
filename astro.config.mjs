@@ -14,5 +14,5 @@ export default defineConfig({
 	},
 
 	site: 'https://muhammadedowardaya.github.io',
-	base: '/portfolio',
+	base: 'portfolio',
 });

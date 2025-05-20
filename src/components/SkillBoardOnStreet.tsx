@@ -6,7 +6,9 @@ import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
 export function SkillBoardOnStreet(props) {
-	const { nodes, materials } = useGLTF('/models/skills_board_on_street.glb');
+	const { nodes, materials } = useGLTF(
+		`${import.meta.env.BASE_URL}/models/skills_board_on_street.glb`
+	);
 	return (
 		<group {...props} dispose={null}>
 			<group position={[53.304, 0, 0]}>

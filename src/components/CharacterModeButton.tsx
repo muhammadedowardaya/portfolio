@@ -18,13 +18,13 @@ const CharacterModeButton = ({ className }: { className?: string }) => {
 			>
 				{characterMode === 'walking' ? (
 					<img
-						src="/icons/walking-active.svg"
+						src={`${import.meta.env.BASE_URL}/icons/walking-active.svg`}
 						alt="walking icon"
 						className="w-[40px] pointer-events-none"
 					/>
 				) : (
 					<img
-						src="/icons/walking.svg"
+						src={`${import.meta.env.BASE_URL}/icons/walking.svg`}
 						alt="walking icon"
 						className="w-[40px] pointer-events-none"
 					/>
@@ -38,13 +38,13 @@ const CharacterModeButton = ({ className }: { className?: string }) => {
 			>
 				{characterMode === 'running' ? (
 					<img
-						src="/icons/running-active.svg"
+						src={`${import.meta.env.BASE_URL}/icons/running-active.svg`}
 						alt="running icon"
 						className="w-[40px] pointer-events-none"
 					/>
 				) : (
 					<img
-						src="/icons/running.svg"
+						src={`${import.meta.env.BASE_URL}/icons/running.svg`}
 						alt="running icon"
 						className="w-[40px] pointer-events-none"
 					/>
@@ -58,14 +58,14 @@ const CharacterModeButton = ({ className }: { className?: string }) => {
 			>
 				{characterMode === 'flying' ? (
 					<img
-						src="/icons/flying-active.svg"
+						src={`${import.meta.env.BASE_URL}/icons/flying-active.svg`}
 						width={47}
 						alt="flying icon"
 						className="w-[40px] pointer-events-none"
 					/>
 				) : (
 					<img
-						src="/icons/flying.svg"
+						src={`${import.meta.env.BASE_URL}/icons/flying.svg`}
 						width={47}
 						alt="flying icon"
 						className="w-[40px] pointer-events-none"

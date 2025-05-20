@@ -13,8 +13,9 @@ type MeshProps = JSX.IntrinsicElements['group'] & {
 };
 
 export function Lamp({ showSpotlight, ...props }: MeshProps) {
-	const { nodes, materials } = useGLTF('/models/lampu_jalan.glb');
-	const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+	const { nodes, materials } = useGLTF(
+		`${import.meta.env.BASE_URL}/models/lampu_jalan.glb`
+	);
 
 	return (
 		<group {...props} dispose={null}>

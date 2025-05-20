@@ -51,7 +51,10 @@ const GlowingRing = () => {
 					<i></i>
 				</div>
 
-				<img src="/photo/aku-resized.jpg" alt="my image" />
+				<img
+					src={`${import.meta.env.BASE_URL}/photo/aku-resized.jpg`}
+					alt="my image"
+				/>
 			</div>
 		</div>
 	);
