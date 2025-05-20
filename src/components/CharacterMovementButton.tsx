@@ -46,13 +46,13 @@ const CharacterMovementButton = ({ className }: { className?: string }) => {
 			>
 				{direction === 'right' ? (
 					<img
-						src="/icons/arrow-active.svg"
+						src={`${import.meta.env.BASE_URL}/icons/arrow-active.svg`}
 						className="-rotate-90 pointer-events-none w-[24px]"
 						alt="arrow icon"
 					/>
 				) : (
 					<img
-						src="/icons/arrow.svg"
+						src={`${import.meta.env.BASE_URL}/icons/arrow.svg`}
 						className="-rotate-90 pointer-events-none w-[24px]"
 						alt="arrow icon"
 					/>
