@@ -1,0 +1,44 @@
+{
+	"name": "my-portfolio-2",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/react": "4.2.7",
+		"@radix-ui/react-navigation-menu": "^1.2.5",
+		"@radix-ui/react-slot": "^1.1.2",
+		"@radix-ui/react-switch": "^1.2.2",
+		"@react-three/drei": "^10.0.8",
+		"@react-three/fiber": "^9.1.2",
+		"@react-three/rapier": "^2.0.1",
+		"@tailwindcss/vite": "^4.1.7",
+		"@types/react": "^19.0.12",
+		"@types/react-dom": "^19.0.4",
+		"@types/react-scroll": "^1.8.10",
+		"astro": "5.7.13",
+		"class-variance-authority": "^0.7.1",
+		"clsx": "^2.1.1",
+		"ecctrl": "^1.0.92",
+		"gsap": "^3.13.0",
+		"jotai": "^2.12.2",
+		"leva": "^0.10.0",
+		"lucide-react": "^0.486.0",
+		"motion": "^12.6.3",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
+		"react-joystick-component": "^6.2.1",
+		"react-scroll": "^1.9.3",
+		"tailwind-merge": "^3.3.0",
+		"tailwindcss": "^4.1.7",
+		"three": "^0.175.0",
+		"troika-three-text": "^0.52.4"
+	},
+	"devDependencies": {
+		"@iconify/react": "^5.2.1"
+	}
+}

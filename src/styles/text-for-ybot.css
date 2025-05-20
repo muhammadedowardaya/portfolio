@@ -1,0 +1,72 @@
+#text-for-ybot {
+	position: absolute;
+	top: 38%;
+	left: 50%;
+	transform: translate(-50%, -62%);
+	max-width: 75%;
+	width: max-content;
+	font-size: 10px;
+
+	#wrapper {
+		p {
+			text-align: justify;
+			div {
+				color: white;
+			}
+		}
+
+		.cursor {
+			&.blink {
+				animation: blink 0.7s infinite;
+			}
+		}
+	}
+}
+
+@media (min-width: 360px) {
+	#text-for-ybot {
+		max-width: 70%;
+		font-size: 12px;
+	}
+}
+
+@media (min-width: 400px) {
+	#text-for-ybot {
+		max-width: 69%;
+		font-size: 14px;
+		top: 35%;
+		left: 50%;
+		transform: translate(-50%, -65%);
+	}
+}
+
+@media (min-width: 600px) {
+	#text-for-ybot {
+		max-width: 400px;
+		font-size: 16px;
+	}
+}
+
+@media (min-width: 780px) {
+	#text-for-ybot {
+		max-width: 450px;
+		font-size: 20px;
+	}
+}
+
+@media (min-width: 1024px) {
+	#text-for-ybot {
+		max-width: 450px;
+		font-size: 16px;
+	}
+}
+
+@keyframes blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}

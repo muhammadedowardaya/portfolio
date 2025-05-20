@@ -1,0 +1,113 @@
+.contact-container {
+	color: white;
+	border-radius: 50%;
+
+	.contact-list {
+		position: relative;
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&.active {
+			transform: rotate(20deg);
+
+			.contact-toggle {
+				transform: rotate(-20deg);
+			}
+
+			.contact-item {
+				transform: rotate(calc(360deg / 4 * var(--i)));
+
+				a {
+					transform: rotate(calc((360deg / -4 * var(--i)) - 20deg));
+
+					p {
+						transition: 1s;
+						transition-delay: calc(0.5s * var(--i));
+						opacity: 1;
+						bottom: -30px;
+						padding: 2px 8px;
+						background-color: #000;
+						border-radius: 3px;
+
+						/* &.gmail,
+						&.instagram {
+							top: -30px;
+						}*/
+
+						&.github,
+						&.linkedin {
+							bottom: -45px;
+						}
+					}
+				}
+			}
+		}
+
+		.contact-toggle {
+			text-align: center;
+			background-color: #171717;
+			border: 1px solid white;
+			border-radius: 50%;
+			color: white;
+			display: block;
+			position: absolute;
+			z-index: 50;
+			overflow: hidden;
+			padding: 10px;
+		}
+
+		.contact-item {
+			text-align: center;
+			transition: 0.5s;
+			transition-delay: calc(0.1s * var(--i));
+			position: absolute;
+			z-index: 10;
+			left: -20px;
+			transform: rotate(0deg) translateX(100px);
+			transform-origin: 120px;
+
+			a {
+				display: flex;
+				justify-content: center;
+				align-items: start;
+				transition: 0.5s;
+				position: relative;
+
+				.icon {
+					width: 40px;
+					height: 40px;
+				}
+
+				p {
+					display: none;
+					opacity: 0;
+					font-size: 12px;
+					position: absolute;
+				}
+
+				@media (min-width: 500px) {
+					& p {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+
+	@media (min-width: 500px) {
+		& .contact-list {
+			width: 300px;
+			height: 300px;
+
+			.contact-item {
+				transform: rotate(0deg) translateX(150px);
+				transform-origin: 172px;
+				left: -25px;
+			}
+		}
+	}
+}
