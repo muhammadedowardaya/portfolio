@@ -63,7 +63,7 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 		characterPositionAtom
 	);
 
-	const lastAudioRef = useRef<'walking' | 'running' | 'flying'>(null);
+	const didMountRef = useRef(false);
 
 	const setLeftHandPosition = useSetAtom(leftHandPositionAtom);
 	const setRightHandPosition = useSetAtom(rightHandPositionAtom);
@@ -117,8 +117,6 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 	}, []);
 
 	useEffect(() => {
-		playLoop(null);
-
 		async function handleLooking() {
 			setCharacterAction('looking');
 			setZoomType(1);
@@ -141,20 +139,19 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 			} else if (characterMode === 'walking') {
 				setCharacterAction('walking');
 				playLoop('walking', 0.9);
-				lastAudioRef.current = 'walking';
 			} else if (characterMode === 'running') {
 				setCharacterAction('running');
 				playLoop('running');
-				lastAudioRef.current = 'running';
 			} else if (characterMode === 'flying') {
 				setCharacterAction('flying');
 				playLoop('flying');
-				lastAudioRef.current = 'flying';
 			}
 		}
 	}, [direction, characterMode, isLooking]);
 
 	useEffect(() => {
+		playLoop(null);
+
 		if (selectedMenu === 'tentang_saya') {
 			if (lastSelectedMenuRef.current === 'kontak') {
 				setMovementForContactMenu(true);
@@ -214,7 +211,7 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 				() => {
 					setCharacterAction('idle');
 					setMovementForContactMenu(false);
-					playLoop('walking');
+					playLoop(lastSelectedMenuRef.current === 'kontak' ? 'walking' : null);
 				},
 				lastSelectedMenuRef.current === 'kontak' ? 2000 : 0
 			);
