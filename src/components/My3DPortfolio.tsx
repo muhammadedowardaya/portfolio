@@ -68,9 +68,7 @@ export default function My3DPortfolio() {
 	};
 
 	useEffect(() => {
-		audioRef.current = new Audio(
-			`https://muhammadedowardaya.my.id/sfx/loading.mp3`
-		);
+		audioRef.current = new Audio(`/sfx/loading.mp3`);
 	}, []);
 
 	useEffect(() => {
