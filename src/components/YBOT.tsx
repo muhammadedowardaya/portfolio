@@ -37,6 +37,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import type { JSX } from 'astro/jsx-runtime';
 import type { Object3D } from 'three';
 import useWindowSize from '@/hooks/useWindowSize';
+import { loadBuffer, playLoop } from '@/lib/audio';
 
 type CharacterProps = JSX.IntrinsicElements['group'] & {
 	loopAnimation?: Boolean;
@@ -49,7 +50,6 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 
 	const { camera } = useThree();
 
-	const lastAudioRef = useRef<string | null>(null);
 	const lastSelectedMenuRef = useRef<string | null>(null);
 	const lastCharacterActionRef = useRef<string | null>(null);
 
@@ -63,13 +63,7 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 		characterPositionAtom
 	);
 
-	const audioRef = useRef<
-		Record<'walking' | 'running' | 'wind', HTMLAudioElement>
-	>({
-		walking: new Audio(`/sfx/walking_loopable.mp3`),
-		running: new Audio(`/sfx/running_loopable.mp3`),
-		wind: new Audio(`/sfx/wind_loopable.mp3`),
-	});
+	const lastAudioRef = useRef<'walking' | 'running' | 'flying'>(null);
 
 	const setLeftHandPosition = useSetAtom(leftHandPositionAtom);
 	const setRightHandPosition = useSetAtom(rightHandPositionAtom);
@@ -117,49 +111,19 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 	}
 
 	useEffect(() => {
+		loadBuffer('walking', '/sfx/walking_loopable.mp3');
+		loadBuffer('running', '/sfx/running_loopable.mp3');
+		loadBuffer('flying', '/sfx/wind-output.mp3');
+	}, []);
+
+	useEffect(() => {
+		playLoop(null);
+
 		async function handleLooking() {
 			setCharacterAction('looking');
 			setZoomType(1);
 			await delay(4000);
 			setZoomType(2);
-		}
-
-		function playSFX(mode: 'walking' | 'running' | 'wind' | null) {
-			// Stop all sounds first
-
-			Object.values(audioRef.current).forEach((audio) => {
-				audio.pause();
-				audio.currentTime = 0;
-				audio.loop = true;
-
-				if (mode === 'walking') {
-					audioRef.current.walking.play();
-					audio.playbackRate = 0.9;
-				} else if (mode === 'running') {
-					audioRef.current.running.play();
-				} else if (mode === 'wind') {
-					audioRef.current.wind.volume = 1;
-					audioRef.current.wind.play();
-					audio.playbackRate = 1;
-				}
-			});
-		}
-
-		function fadeOutAudio(audio: HTMLAudioElement, duration = 1000) {
-			const stepTime = 50; // Interval in ms
-			const steps = duration / stepTime;
-			const volumeStep = audio.volume / steps;
-
-			const interval = setInterval(() => {
-				if (audio.volume - volumeStep > 0) {
-					audio.volume -= volumeStep;
-				} else {
-					audio.volume = 0;
-					audio.pause();
-					audio.currentTime = 0;
-					clearInterval(interval);
-				}
-			}, stepTime);
 		}
 
 		if (isLooking) {
@@ -168,29 +132,24 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 			if (direction === null) {
 				if (characterMode === 'flying') {
 					setCharacterAction('floating');
-					fadeOutAudio(audioRef.current.wind, 800);
-					setTimeout(() => {
-						playSFX(null);
-					}, 1500);
 				} else if (characterMode === 'running') {
 					setCharacterAction('offensive_idle');
-					playSFX(null);
 				} else {
 					setCharacterAction('idle');
-					playSFX(null);
 				}
+				playLoop(null);
 			} else if (characterMode === 'walking') {
 				setCharacterAction('walking');
-				playSFX('walking');
+				playLoop('walking', 0.9);
 				lastAudioRef.current = 'walking';
 			} else if (characterMode === 'running') {
 				setCharacterAction('running');
-				playSFX('running');
+				playLoop('running');
 				lastAudioRef.current = 'running';
 			} else if (characterMode === 'flying') {
 				setCharacterAction('flying');
-				playSFX('wind');
-				lastAudioRef.current = 'wind';
+				playLoop('flying');
+				lastAudioRef.current = 'flying';
 			}
 		}
 	}, [direction, characterMode, isLooking]);
@@ -200,10 +159,6 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 			if (lastSelectedMenuRef.current === 'kontak') {
 				setMovementForContactMenu(true);
 
-				audioRef.current.walking.currentTime = 0;
-				audioRef.current.walking.loop = true;
-				audioRef.current.walking.playbackRate = 1;
-
 				setCharacterAction('sit_to_stand');
 
 				setTimeout(() => {
@@ -212,11 +167,11 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 				}, 1000);
 
 				setTimeout(() => {
-					audioRef.current.walking.play();
+					playLoop('walking');
 				}, 1800);
 
 				setTimeout(() => {
-					audioRef.current.walking.pause();
+					playLoop(null);
 				}, 2800);
 			}
 
@@ -239,10 +194,6 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 			if (lastSelectedMenuRef.current === 'kontak') {
 				setMovementForContactMenu(true);
 
-				audioRef.current.walking.currentTime = 0;
-				audioRef.current.walking.loop = true;
-				audioRef.current.walking.playbackRate = 1;
-
 				setCharacterAction('sit_to_stand');
 
 				setTimeout(() => {
@@ -251,11 +202,11 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 				}, 1000);
 
 				setTimeout(() => {
-					audioRef.current.walking.play();
+					playLoop('walking');
 				}, 1800);
 
 				setTimeout(() => {
-					audioRef.current.walking.pause();
+					playLoop(null);
 				}, 2800);
 			}
 
@@ -263,7 +214,7 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 				() => {
 					setCharacterAction('idle');
 					setMovementForContactMenu(false);
-					audioRef.current.walking.pause();
+					playLoop('walking');
 				},
 				lastSelectedMenuRef.current === 'kontak' ? 2000 : 0
 			);
@@ -271,16 +222,13 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 			setCurrentIntroIndex(1);
 			setCharacterAction('sitting');
 			setMovementForContactMenu(true);
-			audioRef.current.walking.currentTime = 0;
-			audioRef.current.walking.loop = true;
-			audioRef.current.walking.playbackRate = 1;
 
 			setTimeout(() => {
-				audioRef.current.walking.play();
+				playLoop('walking');
 			}, 1000);
 
 			setTimeout(() => {
-				audioRef.current.walking.pause();
+				playLoop(null);
 			}, 3400);
 
 			setTimeout(() => {

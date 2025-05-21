@@ -9,6 +9,7 @@ const LookingButton = ({ className }: { className?: string }) => {
 	const handleClick = () => {
 		if (audioRef.current && !isLooking) {
 			audioRef.current.pause();
+			audioRef.current.volume = 0.3;
 			audioRef.current.currentTime = 0;
 			audioRef.current.playbackRate = 0.5;
 			audioRef.current.play();

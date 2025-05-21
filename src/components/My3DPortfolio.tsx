@@ -154,7 +154,7 @@ export default function My3DPortfolio() {
 					</Physics>
 				</Suspense>
 				<Environment
-					files={`/textures/nightsky.exr`}
+					files={`/textures/DaySkyHDRI055B_2K-HDR.exr`}
 					// background
 					ground={{
 						height: 100, // Atur tinggi sphere HDRI dari ground ke atas
