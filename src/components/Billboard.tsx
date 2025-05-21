@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei';
 
 export function Billboard(props) {
 	const { nodes, materials } = useGLTF(
-		`${import.meta.env.BASE_URL}/models/billboard.glb`
+		`${import.meta.env.PUBLIC_SITE}/models/billboard.glb`
 	);
 	return (
 		<group {...props} dispose={null}>
@@ -413,4 +413,4 @@ export function Billboard(props) {
 	);
 }
 
-useGLTF.preload(`${import.meta.env.BASE_URL}/models/billboard.glb`);
+useGLTF.preload(`${import.meta.env.PUBLIC_SITE}/models/billboard.glb`);

@@ -14,7 +14,7 @@ const LookingButton = ({ className }: { className?: string }) => {
 					className={`w-[45px] h-[45px] rounded-full bg-black p-1 border-2 border-white`}
 				>
 					<img
-						src={`${import.meta.env.BASE_URL}/icons/zoom-out-active.svg`}
+						src={`${import.meta.env.PUBLIC_SITE}/icons/zoom-out-active.svg`}
 						alt="look up icon"
 						className="w-full h-full pointer-events-none"
 					/>
@@ -25,7 +25,7 @@ const LookingButton = ({ className }: { className?: string }) => {
 					className={`group w-[45px] h-[45px] rounded-full bg-black p-1 border-2 border-white`}
 				>
 					<img
-						src={`${import.meta.env.BASE_URL}/icons/zoom-in-active.svg`}
+						src={`${import.meta.env.PUBLIC_SITE}/icons/zoom-in-active.svg`}
 						alt="look up icon"
 						className="w-full h-full pointer-events-none"
 					/>

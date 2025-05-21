@@ -12,7 +12,7 @@ type MeshProps = JSX.IntrinsicElements['group'];
 
 export function Street(props: MeshProps) {
 	const { nodes, materials } = useGLTF(
-		`${import.meta.env.BASE_URL}/models/street.glb`
+		`${import.meta.env.PUBLIC_SITE}/models/street.glb`
 	);
 
 	useEffect(() => {
@@ -81,4 +81,4 @@ export function Street(props: MeshProps) {
 	);
 }
 
-useGLTF.preload(`${import.meta.env.BASE_URL}/models/street.glb`);
+useGLTF.preload(`${import.meta.env.PUBLIC_SITE}/models/street.glb`);

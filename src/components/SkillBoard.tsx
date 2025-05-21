@@ -26,12 +26,12 @@ type MeshProps = JSX.IntrinsicElements['group'];
 export function SkillBoard(props: MeshProps) {
 	const group = useRef<Group | null>(null);
 	const { nodes, materials, animations } = useGLTF(
-		`${import.meta.env.BASE_URL}/models/skills-board.glb`
+		`${import.meta.env.PUBLIC_SITE}/models/skills-board.glb`
 	);
 	const { actions } = useAnimations(animations, group);
 
 	const texture = useTexture(
-		`${import.meta.env.BASE_URL}/textures/my-skills.png`
+		`${import.meta.env.PUBLIC_SITE}/textures/my-skills.png`
 	);
 	texture.wrapS = texture.wrapT = RepeatWrapping;
 	texture.repeat.set(1, 1);
@@ -125,4 +125,4 @@ export function SkillBoard(props: MeshProps) {
 	);
 }
 
-useGLTF.preload(`${import.meta.env.BASE_URL}/models/skills-board.glb`);
+useGLTF.preload(`${import.meta.env.PUBLIC_SITE}/models/skills-board.glb`);

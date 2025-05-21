@@ -45,7 +45,7 @@ type CharacterProps = JSX.IntrinsicElements['group'] & {
 export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 	const group = useRef<Group>(null);
 	const { nodes, materials, animations } = useGLTF(
-		`${import.meta.env.BASE_URL}/models/YBOT.glb`
+		`${import.meta.env.PUBLIC_SITE}/models/YBOT.glb`
 	);
 	const { actions, mixer } = useAnimations(animations, group);
 
@@ -67,9 +67,9 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 	const audioRef = useRef<
 		Record<'walking' | 'running' | 'wind', HTMLAudioElement>
 	>({
-		walking: new Audio(`${import.meta.env.BASE_URL}/sfx/robot-step.mp3`),
-		running: new Audio(`${import.meta.env.BASE_URL}/sfx/running.mp3`),
-		wind: new Audio(`${import.meta.env.BASE_URL}/sfx/wind.mp3`),
+		walking: new Audio(`${import.meta.env.PUBLIC_SITE}/sfx/robot-step.mp3`),
+		running: new Audio(`${import.meta.env.PUBLIC_SITE}/sfx/running.mp3`),
+		wind: new Audio(`${import.meta.env.PUBLIC_SITE}/sfx/wind.mp3`),
 	});
 
 	const setLeftHandPosition = useSetAtom(leftHandPositionAtom);
@@ -553,4 +553,4 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 	);
 }
 
-useGLTF.preload(`${import.meta.env.BASE_URL}/models/YBOT.glb`);
+useGLTF.preload(`${import.meta.env.PUBLIC_SITE}/models/YBOT.glb`);
