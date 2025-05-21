@@ -105,7 +105,7 @@ export default function My3DPortfolio() {
 						<span>Portfolio 3D</span> <br />
 						<span>Muhammad Edo Wardaya</span>
 					</h1>
-					<p className="text-center text-sm lg:text-base p-4 text-white/50">
+					<p className="text-center text-base p-4 text-white/50">
 						Website ini menampilkan{' '}
 						<b className="text-white">karakter robot 3D</b> yang dapat menyapa,
 						berjalan menelusuri jalan dan menari
