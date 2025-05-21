@@ -6,9 +6,7 @@ import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
 export function NatureForStreet(props) {
-	const { nodes, materials } = useGLTF(
-		`${import.meta.env.PUBLIC_SITE}/models/nature_for_street.glb`
-	);
+	const { nodes, materials } = useGLTF(`/models/nature_for_street.glb`);
 
 	return (
 		<group {...props} dispose={null}>
@@ -1551,4 +1549,4 @@ export function NatureForStreet(props) {
 	);
 }
 
-useGLTF.preload(`${import.meta.env.PUBLIC_SITE}/models/nature_for_street.glb`);
+useGLTF.preload(`/models/nature_for_street.glb`);

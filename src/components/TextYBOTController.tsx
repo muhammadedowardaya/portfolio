@@ -21,13 +21,13 @@ const TextYBOTController = () => {
 			>
 				{currentIntroIndex === 1 ? (
 					<img
-						src={`${import.meta.env.PUBLIC_SITE}/icons/chevron-left.svg`}
+						src={`/icons/chevron-left.svg`}
 						className="w-full pointer-events-none"
 						alt="left button icon"
 					/>
 				) : (
 					<img
-						src={`${import.meta.env.PUBLIC_SITE}/icons/chevron-left-active.svg`}
+						src={`/icons/chevron-left-active.svg`}
 						className="w-full pointer-events-none"
 						alt="left button active icon"
 					/>
@@ -45,7 +45,7 @@ const TextYBOTController = () => {
 			>
 				{currentIntroIndex === 3 ? (
 					<img
-						src={`${import.meta.env.PUBLIC_SITE}/icons/chevron-right.svg`}
+						src={`/icons/chevron-right.svg`}
 						className="w-full pointer-events-none"
 						alt="right button icon"
 					/>

@@ -13,9 +13,7 @@ type MeshProps = JSX.IntrinsicElements['group'] & {
 };
 
 export function Lamp({ showSpotlight, ...props }: MeshProps) {
-	const { nodes, materials } = useGLTF(
-		`${import.meta.env.PUBLIC_SITE}/models/lampu_jalan.glb`
-	);
+	const { nodes, materials } = useGLTF(`/models/lampu_jalan.glb`);
 
 	return (
 		<group {...props} dispose={null}>
@@ -101,4 +99,4 @@ export function Lamp({ showSpotlight, ...props }: MeshProps) {
 	);
 }
 
-useGLTF.preload(`${import.meta.env.PUBLIC_SITE}/models/lampu_jalan.glb`);
+useGLTF.preload(`/models/lampu_jalan.glb`);

@@ -6,9 +6,7 @@ import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
 export function Trees(props) {
-	const { nodes, materials } = useGLTF(
-		`${import.meta.env.PUBLIC_SITE}/models/trees.glb`
-	);
+	const { nodes, materials } = useGLTF(`/models/trees.glb`);
 
 	return (
 		<group {...props} dispose={null}>
@@ -106,4 +104,4 @@ export function Trees(props) {
 	);
 }
 
-useGLTF.preload(`${import.meta.env.PUBLIC_SITE}/models/trees.glb`);
+useGLTF.preload(`/models/trees.glb`);

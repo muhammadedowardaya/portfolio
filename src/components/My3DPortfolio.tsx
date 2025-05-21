@@ -68,9 +68,7 @@ export default function My3DPortfolio() {
 	};
 
 	useEffect(() => {
-		audioRef.current = new Audio(
-			`${import.meta.env.PUBLIC_SITE}/sfx/loading.mp3`
-		);
+		audioRef.current = new Audio(`/sfx/loading.mp3`);
 	}, []);
 
 	useEffect(() => {
@@ -96,8 +94,8 @@ export default function My3DPortfolio() {
 				style={{
 					backgroundImage:
 						width !== null && width >= 1000
-							? `url(${import.meta.env.PUBLIC_SITE}/photo/bg-desktop.png)`
-							: `url(${import.meta.env.PUBLIC_SITE}/photo/bg-mobile.png)`,
+							? `url(/photo/bg-desktop.png)`
+							: `url(/photo/bg-mobile.png)`,
 				}}
 			>
 				<div className="bg-[#171717] w-[95%] md:w-[500px]  border-2 text-white border-white z-30 p-8 rounded-md flex flex-col gap-4 justy-center items-center ">
@@ -155,7 +153,7 @@ export default function My3DPortfolio() {
 					</Physics>
 				</Suspense>
 				<Environment
-					files={`${import.meta.env.PUBLIC_SITE}/textures/nightsky.exr`}
+					files={`/textures/nightsky.exr`}
 					// background
 					ground={{
 						height: 100, // Atur tinggi sphere HDRI dari ground ke atas
@@ -212,7 +210,7 @@ export default function My3DPortfolio() {
 												} menu-item rounded-sm flex items-center gap-4 w-full p-2`}
 											>
 												<img
-													src={`${import.meta.env.PUBLIC_SITE}/icons/info.svg`}
+													src={`/icons/info.svg`}
 													width={20}
 													className="pointer-events-none"
 													alt="info icon"
@@ -234,7 +232,7 @@ export default function My3DPortfolio() {
 												} menu-item rounded-sm flex items-center gap-4 w-full p-2`}
 											>
 												<img
-													src={`${import.meta.env.PUBLIC_SITE}/icons/road.svg`}
+													src={`/icons/road.svg`}
 													width={20}
 													height={20}
 													alt="road icon"
@@ -302,7 +300,7 @@ export default function My3DPortfolio() {
 								exit={{ opacity: 0, y: '-50%' }}
 							>
 								<img
-									src={`${import.meta.env.PUBLIC_SITE}/icons/baseline-menu.svg`}
+									src={`/icons/baseline-menu.svg`}
 									width={24}
 									className="pointer-events-none"
 									alt="menu icon"
@@ -404,7 +402,7 @@ export function SceneWrapper({ onLoaded }: { onLoaded: () => void }) {
 function ArrowRight({ className }: { className?: string }) {
 	return (
 		<img
-			src={`${import.meta.env.PUBLIC_SITE}/icons/arrow-right.svg`}
+			src={`/icons/arrow-right.svg`}
 			width={20}
 			alt="penunjuk menu"
 			className={`${className} absolute -left-6 top-1/2 -translate-y-1/2 pointer-events-none`}

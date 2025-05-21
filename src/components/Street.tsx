@@ -11,9 +11,7 @@ import { RigidBody } from '@react-three/rapier';
 type MeshProps = JSX.IntrinsicElements['group'];
 
 export function Street(props: MeshProps) {
-	const { nodes, materials } = useGLTF(
-		`${import.meta.env.PUBLIC_SITE}/models/street.glb`
-	);
+	const { nodes, materials } = useGLTF(`/models/street.glb`);
 
 	useEffect(() => {
 		const mat = materials.jalan_utama_material as MeshStandardMaterial;
@@ -81,4 +79,4 @@ export function Street(props: MeshProps) {
 	);
 }
 
-useGLTF.preload(`${import.meta.env.PUBLIC_SITE}/models/street.glb`);
+useGLTF.preload(`/models/street.glb`);
