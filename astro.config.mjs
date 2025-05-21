@@ -14,5 +14,5 @@ export default defineConfig({
 	},
 
 	site: 'https://muhammadedowardaya.my.id',
-	base: '/',
+	base: 'https://muhammadedowardaya.my.id/',
 });
