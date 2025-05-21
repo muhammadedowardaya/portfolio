@@ -383,4 +383,6 @@ export function SkillBoardOnStreet(props) {
 	);
 }
 
-useGLTF.preload('/models/skills_board_on_street.glb');
+useGLTF.preload(
+	`${import.meta.env.BASE_URL}/models/skills_board_on_street.glb`
+);

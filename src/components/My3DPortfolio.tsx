@@ -1,7 +1,9 @@
 'use client';
 
+import React from 'react';
+
 import { Canvas } from '@react-three/fiber';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import {
 	characterPositionAtom,
@@ -33,11 +35,96 @@ import { Trees } from './Trees';
 import { Wall } from './Wall';
 import useWindowSize from '@/hooks/useWindowSize';
 
+import '@/styles/welcome-section.css';
+
 export default function My3DPortfolio() {
 	const [showMenu, setShowMenu] = useAtom(showMenuAtom);
 	const [selectedMenu, setSelectedMenu] = useAtom(selectedMenuAtom);
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 	const isLooking = useAtomValue(isLookingAtom);
+
+	const { width } = useWindowSize();
+
+	const audioRef = useRef<HTMLAudioElement | null>(null);
+
+	const fadeOutAudio = () => {
+		const audio = audioRef.current;
+		if (!audio) return;
+
+		let volume = audio.volume;
+
+		const fade = setInterval(() => {
+			if (volume > 0.05) {
+				volume -= 0.05;
+				audio.volume = volume;
+			} else {
+				clearInterval(fade);
+				audio.pause();
+				audio.currentTime = 0;
+				audio.volume = 1; // reset untuk pemutaran berikutnya
+			}
+		}, 100); // setiap 100ms
+	};
+
+	useEffect(() => {
+		audioRef.current = new Audio(`${import.meta.env.BASE_URL}/sfx/loading.mp3`);
+	}, []);
+
+	useEffect(() => {
+		const audio = audioRef.current;
+		if (!audio) return;
+
+		if (isOpen && !isLoaded) {
+			audio.currentTime = 0;
+			audio.volume = 1;
+			audio.play().catch((err) => console.error('Audio play error:', err));
+		}
+
+		if (isLoaded) {
+			fadeOutAudio();
+		}
+	}, [isOpen, isLoaded]);
+
+	if (!isOpen) {
+		return (
+			<div
+				id="welcome-section"
+				className={`relative z-10 bg-cover bg-top w-svw h-svh flex justify-center items-center`}
+				style={{
+					backgroundImage:
+						width !== null && width >= 1000
+							? `url(${import.meta.env.BASE_URL}/photo/bg-desktop.png)`
+							: `url(${import.meta.env.BASE_URL}/photo/bg-mobile.png)`,
+				}}
+			>
+				<div className="bg-[#171717] w-[95%] md:w-[500px]  border-2 text-white border-white z-30 p-8 rounded-md flex flex-col gap-4 justy-center items-center ">
+					<h1 className="text-xl md:text-2xl font-bold text-center">
+						<span className="text-white/50">Selamat Datang di</span> <br />
+						Portfolio 3D <br />
+						Muhammad Edo Wardaya
+					</h1>
+					<p className="text-center text-sm lg:text-base p-4 text-white/50">
+						Website ini menampilkan{' '}
+						<b className="text-white">karakter robot 3D</b> yang dapat menyapa,
+						berjalan menelusuri jalan dan menari
+					</p>
+					<button onClick={() => setIsOpen(true)} type="button" className="btn">
+						<strong className="text-xl">START</strong>
+						<div id="container-stars">
+							<div id="stars"></div>
+						</div>
+
+						<div id="glow">
+							<div className="circle"></div>
+							<div className="circle"></div>
+						</div>
+					</button>
+				</div>
+				<div className="absolute z-20 backdrop-blur-xs bg-black/10 inset-0"></div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="relative w-svw h-svh overflow-hidden">
@@ -105,13 +192,13 @@ export default function My3DPortfolio() {
 								initial={{ opacity: 0, y: '-50%' }}
 								animate={{ opacity: 1, y: '0%' }}
 								exit={{ opacity: 0, y: '-50%' }}
-								className="absolute z-100 top-[20%] left-1/2 -translate-x-1/2 flex justify-center items-center "
+								className="border-1 border-white absolute z-100 top-[20%] left-1/2 -translate-x-1/2 flex justify-center items-center "
 							>
 								<div className="flex flex-col gap-4 pt-4 pb-6 px-6 w-[250px] min-[360px]:w-[300px] min-[400px]:w-[350px] h-max backdrop-blur-md bg-black/10 rounded-md">
 									<h2 className="text-center text-xl font-bold text-slate-100">
 										Menu
 									</h2>
-									<ul className="flex flex-col gap-4">
+									<ul className="flex flex-col gap-4 text-sm">
 										<li className="relative group">
 											<button
 												onClick={() => {
@@ -128,7 +215,7 @@ export default function My3DPortfolio() {
 													className="pointer-events-none"
 													alt="info icon"
 												/>
-												<span>Tentang Saya</span>
+												<b>Tentang Saya</b>
 											</button>
 											<ArrowRight
 												className={`opacity-0 group-hover:opacity-100`}
@@ -151,7 +238,7 @@ export default function My3DPortfolio() {
 													alt="road icon"
 													className="pointer-events-none"
 												/>
-												<span>Telusuri Jalan Ini</span>
+												<b>Telusuri Jalan Ini</b>
 											</button>
 											<ArrowRight
 												className={`opacity-0 group-hover:opacity-100`}
@@ -176,7 +263,7 @@ export default function My3DPortfolio() {
 													alt="contact icon"
 													className="pointer-events-none"
 												/>
-												<span>Kontak Saya</span>
+												<b>Kontak Saya</b>
 											</button>
 											<ArrowRight
 												className={`opacity-0 group-hover:opacity-100`}

@@ -454,4 +454,4 @@ export function Wall(props) {
 	);
 }
 
-useGLTF.preload('/models/wall.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}/models/wall.glb`);

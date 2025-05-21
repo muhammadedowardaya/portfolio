@@ -81,4 +81,4 @@ export function Street(props: MeshProps) {
 	);
 }
 
-useGLTF.preload('/models/street.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}/models/street.glb`);

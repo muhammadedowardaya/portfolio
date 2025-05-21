@@ -13,11 +13,33 @@ import '@/styles/global.css';
 			href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Julius+Sans+One&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href={`${import.meta.env.BASE_URL}/apple-touch-icon.png`}
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href={`${import.meta.env.BASE_URL}/favicon-32x32.png`}
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href={`${import.meta.env.BASE_URL}/favicon-16x16.png`}
+		/>
+		<link
+			rel="manifest"
+			href={`${import.meta.env.BASE_URL}/site.webmanifest`}
+		/>
+
 		<meta name="generator" content={Astro.generator} />
-		<title>My Portfolio</title>
+		<title>My 3D Portfolio</title>
 	</head>
-	<body class="font-paragraf">
+	<body>
 		<slot />
 	</body>
 </html>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
 @import 'tailwindcss';
 /* @import 'tw-animate-css'; */
 
@@ -75,9 +77,9 @@
 }
 
 @theme {
-	--font-heading: 'Julius Sans One', sans-serif;
-	--font-sub-heading: 'Archivo Narrow', sans-serif;
-	--font-paragraf: 'Source Sans 3', sans-serif;
+	--font-heading: 'Exo', sans-serif;
+	--font-detail: 'Share Tech Mono', monospace;
+	--font-paragraf: 'Rajdhani', sans-serif;
 }
 
 @theme inline {
@@ -124,6 +126,23 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply font-heading;
+	}
+
+	b {
+		@apply font-detail;
+	}
+
+	p {
+		@apply font-paragraf;
 	}
 }
 

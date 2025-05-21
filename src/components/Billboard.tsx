@@ -413,4 +413,4 @@ export function Billboard(props) {
 	);
 }
 
-useGLTF.preload('/models/billboard.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}/models/billboard.glb`);

@@ -64,6 +64,14 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 		characterPositionAtom
 	);
 
+	const audioRef = useRef<
+		Record<'walking' | 'running' | 'wind', HTMLAudioElement>
+	>({
+		walking: new Audio(`${import.meta.env.BASE_URL}/sfx/robot-step.mp3`),
+		running: new Audio(`${import.meta.env.BASE_URL}/sfx/running.mp3`),
+		wind: new Audio(`${import.meta.env.BASE_URL}/sfx/wind.mp3`),
+	});
+
 	const setLeftHandPosition = useSetAtom(leftHandPositionAtom);
 	const setRightHandPosition = useSetAtom(rightHandPositionAtom);
 
@@ -116,6 +124,44 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 			setZoomType(2);
 		}
 
+		function playSFX(mode: 'walking' | 'running' | 'wind' | null) {
+			// Stop all sounds first
+
+			Object.values(audioRef.current).forEach((audio) => {
+				audio.pause();
+				audio.currentTime = 0;
+				audio.loop = true;
+
+				if (mode === 'walking') {
+					audioRef.current.walking.play();
+					audio.playbackRate = 3.2;
+				} else if (mode === 'running') {
+					audioRef.current.walking.play();
+					audio.playbackRate = 5.1;
+				} else if (mode === 'wind') {
+					audioRef.current.wind.play();
+					audio.playbackRate = 1;
+				}
+			});
+		}
+
+		function fadeOutAudio(audio: HTMLAudioElement, duration = 1000) {
+			const stepTime = 50; // Interval in ms
+			const steps = duration / stepTime;
+			const volumeStep = audio.volume / steps;
+
+			const interval = setInterval(() => {
+				if (audio.volume - volumeStep > 0) {
+					audio.volume -= volumeStep;
+				} else {
+					audio.volume = 0;
+					audio.pause();
+					audio.currentTime = 0;
+					clearInterval(interval);
+				}
+			}, stepTime);
+		}
+
 		if (isLooking) {
 			handleLooking();
 		} else {
@@ -127,9 +173,18 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 				} else {
 					setCharacterAction('idle');
 				}
-			} else if (characterMode === 'walking') setCharacterAction('walking');
-			else if (characterMode === 'running') setCharacterAction('running');
-			else if (characterMode === 'flying') setCharacterAction('flying');
+
+				playSFX(null);
+			} else if (characterMode === 'walking') {
+				setCharacterAction('walking');
+				playSFX('walking');
+			} else if (characterMode === 'running') {
+				setCharacterAction('running');
+				playSFX('running');
+			} else if (characterMode === 'flying') {
+				setCharacterAction('flying');
+				playSFX('wind');
+			}
 		}
 	}, [direction, characterMode, isLooking]);
 
@@ -137,12 +192,25 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 		if (selectedMenu === 'tentang_saya') {
 			if (lastSelectedMenuRef.current === 'kontak') {
 				setMovementForContactMenu(true);
+
+				audioRef.current.walking.currentTime = 0;
+				audioRef.current.walking.loop = true;
+				audioRef.current.walking.playbackRate = 3.2;
+
 				setCharacterAction('sit_to_stand');
 
 				setTimeout(() => {
 					setStandToSitting(false);
 					setCharacterAction('walking');
 				}, 1000);
+
+				setTimeout(() => {
+					audioRef.current.walking.play();
+				}, 1800);
+
+				setTimeout(() => {
+					audioRef.current.walking.pause();
+				}, 2800);
 			}
 
 			setTimeout(
@@ -159,21 +227,36 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 				lastSelectedMenuRef.current === 'kontak' ? 2000 : 0
 			);
 		} else if (selectedMenu === 'telusuri_jalan_ini') {
+			setCurrentIntroIndex(1);
+
 			if (lastSelectedMenuRef.current === 'kontak') {
 				setMovementForContactMenu(true);
+
+				audioRef.current.walking.currentTime = 0;
+				audioRef.current.walking.loop = true;
+				audioRef.current.walking.playbackRate = 3.2;
+
 				setCharacterAction('sit_to_stand');
 
 				setTimeout(() => {
 					setStandToSitting(false);
-					console.info('setStandToSitting', standToSitting);
 					setCharacterAction('walking');
 				}, 1000);
+
+				setTimeout(() => {
+					audioRef.current.walking.play();
+				}, 1800);
+
+				setTimeout(() => {
+					audioRef.current.walking.pause();
+				}, 2800);
 			}
 
 			setTimeout(
 				() => {
 					setCharacterAction('idle');
 					setMovementForContactMenu(false);
+					audioRef.current.walking.pause();
 				},
 				lastSelectedMenuRef.current === 'kontak' ? 2000 : 0
 			);
@@ -181,6 +264,18 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 			setCurrentIntroIndex(1);
 			setCharacterAction('sitting');
 			setMovementForContactMenu(true);
+			audioRef.current.walking.currentTime = 0;
+			audioRef.current.walking.loop = true;
+			audioRef.current.walking.playbackRate = 3.2;
+
+			setTimeout(() => {
+				audioRef.current.walking.play();
+			}, 1000);
+
+			setTimeout(() => {
+				audioRef.current.walking.pause();
+			}, 3400);
+
 			setTimeout(() => {
 				setStandToSitting(true);
 			}, 800);
@@ -458,4 +553,4 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 	);
 }
 
-useGLTF.preload('/models/YBOT.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}/models/YBOT.glb`);

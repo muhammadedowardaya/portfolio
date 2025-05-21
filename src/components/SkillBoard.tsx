@@ -125,4 +125,4 @@ export function SkillBoard(props: MeshProps) {
 	);
 }
 
-useGLTF.preload('/models/skills-board.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}/models/skills-board.glb`);

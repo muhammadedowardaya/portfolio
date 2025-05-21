@@ -1551,4 +1551,4 @@ export function NatureForStreet(props) {
 	);
 }
 
-useGLTF.preload('/models/nature_for_street.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}/models/nature_for_street.glb`);

@@ -106,4 +106,4 @@ export function Trees(props) {
 	);
 }
 
-useGLTF.preload('/models/trees.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}/models/trees.glb`);

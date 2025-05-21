@@ -101,4 +101,4 @@ export function Lamp({ showSpotlight, ...props }: MeshProps) {
 	);
 }
 
-useGLTF.preload('/models/lampu_jalan.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}/models/lampu_jalan.glb`);
