@@ -76,6 +76,7 @@ export default function My3DPortfolio() {
 		if (!audio) return;
 
 		if (isOpen && !isLoaded) {
+			audio.pause();
 			audio.currentTime = 0;
 			audio.volume = 1;
 			audio.play().catch((err) => console.error('Audio play error:', err));

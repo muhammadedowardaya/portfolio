@@ -202,7 +202,7 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 
 				audioRef.current.walking.currentTime = 0;
 				audioRef.current.walking.loop = true;
-				audioRef.current.walking.playbackRate = 3.2;
+				audioRef.current.walking.playbackRate = 1;
 
 				setCharacterAction('sit_to_stand');
 
@@ -241,7 +241,7 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 
 				audioRef.current.walking.currentTime = 0;
 				audioRef.current.walking.loop = true;
-				audioRef.current.walking.playbackRate = 3.2;
+				audioRef.current.walking.playbackRate = 1;
 
 				setCharacterAction('sit_to_stand');
 
@@ -273,7 +273,7 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 			setMovementForContactMenu(true);
 			audioRef.current.walking.currentTime = 0;
 			audioRef.current.walking.loop = true;
-			audioRef.current.walking.playbackRate = 3.2;
+			audioRef.current.walking.playbackRate = 1;
 
 			setTimeout(() => {
 				audioRef.current.walking.play();
