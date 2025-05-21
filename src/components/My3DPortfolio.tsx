@@ -98,11 +98,11 @@ export default function My3DPortfolio() {
 							: `url(/photo/bg-mobile.png)`,
 				}}
 			>
-				<div className="bg-[#171717] w-[95%] md:w-[500px]  border-2 text-white border-white z-30 p-8 rounded-md flex flex-col gap-4 justy-center items-center ">
+				<div className="bg-[#171717] w-[90%] md:w-[500px]  border-2 text-white border-white z-30 p-8 rounded-md flex flex-col gap-4 justy-center items-center ">
 					<h1 className="text-xl md:text-2xl font-bold text-center">
 						<span className="text-white/50">Selamat Datang di</span> <br />
-						Portfolio 3D <br />
-						Muhammad Edo Wardaya
+						<span>Portfolio 3D</span> <br />
+						<span>Muhammad Edo Wardaya</span>
 					</h1>
 					<p className="text-center text-sm lg:text-base p-4 text-white/50">
 						Website ini menampilkan{' '}
@@ -255,9 +255,7 @@ export default function My3DPortfolio() {
 												} menu-item rounded-sm flex items-center gap-4 w-full p-2`}
 											>
 												<img
-													src={`${
-														import.meta.env.PUBLIC_SITE
-													}/icons/contact-calendar.svg`}
+													src={`/icons/contact-calendar.svg`}
 													width={20}
 													height={20}
 													alt="contact icon"
@@ -276,9 +274,7 @@ export default function My3DPortfolio() {
 									onClick={() => setShowMenu(false)}
 								>
 									<img
-										src={`${
-											import.meta.env.PUBLIC_SITE
-										}/icons/baseline-close.svg`}
+										src={`/icons/baseline-close.svg`}
 										width={24}
 										className="pointer-events-none"
 										alt="close icon"

@@ -49,6 +49,7 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 
 	const { camera } = useThree();
 
+	const lastAudioRef = useRef<string | null>(null);
 	const lastSelectedMenuRef = useRef<string | null>(null);
 	const lastCharacterActionRef = useRef<string | null>(null);
 
@@ -65,7 +66,7 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 	const audioRef = useRef<
 		Record<'walking' | 'running' | 'wind', HTMLAudioElement>
 	>({
-		walking: new Audio(`/sfx/robot-step.mp3`),
+		walking: new Audio(`/sfx/walking.mp3`),
 		running: new Audio(`/sfx/running.mp3`),
 		wind: new Audio(`/sfx/wind.mp3`),
 	});
@@ -110,7 +111,8 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 	const [movementForContactMenu, setMovementForContactMenu] = useState(false);
 	const [standToSitting, setStandToSitting] = useState(false);
 
-	function delay(ms: number) {
+	function delay(ms: number, skip = false): Promise<void> {
+		if (skip) return Promise.resolve(); // langsung lanjut tanpa delay
 		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 
@@ -132,10 +134,9 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 
 				if (mode === 'walking') {
 					audioRef.current.walking.play();
-					audio.playbackRate = 3.2;
+					audio.playbackRate = 0.9;
 				} else if (mode === 'running') {
-					audioRef.current.walking.play();
-					audio.playbackRate = 5.1;
+					audioRef.current.running.play();
 				} else if (mode === 'wind') {
 					audioRef.current.wind.play();
 					audio.playbackRate = 1;
@@ -172,16 +173,26 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 					setCharacterAction('idle');
 				}
 
-				playSFX(null);
+				async function windAudioFadeOUt() {
+					fadeOutAudio(audioRef.current['wind'], 800);
+					await delay(800, lastAudioRef.current !== 'wind');
+					playSFX(null);
+					audioRef.current.wind.volume = 1;
+				}
+
+				windAudioFadeOUt();
 			} else if (characterMode === 'walking') {
 				setCharacterAction('walking');
 				playSFX('walking');
+				lastAudioRef.current = 'walking';
 			} else if (characterMode === 'running') {
 				setCharacterAction('running');
 				playSFX('running');
+				lastAudioRef.current = 'running';
 			} else if (characterMode === 'flying') {
 				setCharacterAction('flying');
 				playSFX('wind');
+				lastAudioRef.current = 'wind';
 			}
 		}
 	}, [direction, characterMode, isLooking]);
@@ -290,7 +301,7 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 			let offset = new Vector3(0, 3, 5);
 
 			if (currentIntroIndex === 3) {
-				offset = new Vector3(0, 3, 2);
+				offset = new Vector3(0, 3, 3);
 			}
 
 			const targetPosition = new Vector3(pos.x, pos.y, -4).add(offset);

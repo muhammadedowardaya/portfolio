@@ -16,6 +16,7 @@
 		}
 
 		.cursor {
+			font-size: 9px;
 			&.blink {
 				animation: blink 0.7s infinite;
 			}
@@ -37,6 +38,12 @@
 		top: 35%;
 		left: 50%;
 		transform: translate(-50%, -65%);
+
+		#wrapper {
+			.cursor {
+				font-size: 12px;
+			}
+		}
 	}
 }
 
@@ -44,6 +51,12 @@
 	#text-for-ybot {
 		max-width: 400px;
 		font-size: 16px;
+
+		#wrapper {
+			.cursor {
+				font-size: 14px;
+			}
+		}
 	}
 }
 
@@ -51,6 +64,12 @@
 	#text-for-ybot {
 		max-width: 450px;
 		font-size: 20px;
+
+		#wrapper {
+			.cursor {
+				font-size: 18px;
+			}
+		}
 	}
 }
 
@@ -58,6 +77,12 @@
 	#text-for-ybot {
 		max-width: 450px;
 		font-size: 16px;
+
+		#wrapper {
+			.cursor {
+				font-size: 14px;
+			}
+		}
 	}
 }
 

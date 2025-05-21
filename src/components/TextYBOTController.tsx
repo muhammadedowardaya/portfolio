@@ -51,9 +51,7 @@ const TextYBOTController = () => {
 					/>
 				) : (
 					<img
-						src={`${
-							import.meta.env.PUBLIC_SITE
-						}/icons/chevron-right-active.svg`}
+						src={`/icons/chevron-right-active.svg`}
 						className="w-full pointer-events-none"
 						alt="right button active icon"
 					/>
