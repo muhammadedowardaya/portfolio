@@ -111,8 +111,8 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 	}
 
 	useEffect(() => {
-		loadBuffer('walking', '/sfx/walking_loopable.mp3');
-		loadBuffer('running', '/sfx/running_loopable.mp3');
+		loadBuffer('walking', '/sfx/walking-output.mp3');
+		loadBuffer('running', '/sfx/running-output.mp3');
 		loadBuffer('flying', '/sfx/wind-output.mp3');
 	}, []);
 
