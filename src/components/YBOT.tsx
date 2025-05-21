@@ -66,9 +66,9 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 	const audioRef = useRef<
 		Record<'walking' | 'running' | 'wind', HTMLAudioElement>
 	>({
-		walking: new Audio(`/sfx/walking.mp3`),
-		running: new Audio(`/sfx/running.mp3`),
-		wind: new Audio(`/sfx/wind.mp3`),
+		walking: new Audio(`/sfx/walking_loopable.mp3`),
+		running: new Audio(`/sfx/running_loopable.mp3`),
+		wind: new Audio(`/sfx/wind_loopable.mp3`),
 	});
 
 	const setLeftHandPosition = useSetAtom(leftHandPositionAtom);
@@ -138,6 +138,7 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 				} else if (mode === 'running') {
 					audioRef.current.running.play();
 				} else if (mode === 'wind') {
+					audioRef.current.wind.volume = 1;
 					audioRef.current.wind.play();
 					audio.playbackRate = 1;
 				}
@@ -167,20 +168,17 @@ export function YBOT({ loopAnimation, ...props }: CharacterProps) {
 			if (direction === null) {
 				if (characterMode === 'flying') {
 					setCharacterAction('floating');
+					fadeOutAudio(audioRef.current.wind, 800);
+					setTimeout(() => {
+						playSFX(null);
+					}, 1500);
 				} else if (characterMode === 'running') {
 					setCharacterAction('offensive_idle');
+					playSFX(null);
 				} else {
 					setCharacterAction('idle');
-				}
-
-				async function windAudioFadeOUt() {
-					fadeOutAudio(audioRef.current['wind'], 800);
-					await delay(800, lastAudioRef.current !== 'wind');
 					playSFX(null);
-					audioRef.current.wind.volume = 1;
 				}
-
-				windAudioFadeOUt();
 			} else if (characterMode === 'walking') {
 				setCharacterAction('walking');
 				playSFX('walking');
