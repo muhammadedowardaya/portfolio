@@ -157,7 +157,7 @@ export default function My3DPortfolio() {
 					files={`/textures/DaySkyHDRI055B_2K-HDR.exr`}
 					// background
 					ground={{
-						height: 100, // Atur tinggi sphere HDRI dari ground ke atas
+						height: 0, // Atur tinggi sphere HDRI dari ground ke atas
 						radius: 900, // Radius sphere (semakin besar, semakin jauh dari karakter)
 						scale: 900, // Skala global sphere, juga memengaruhi jarak
 					}}
